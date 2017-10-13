@@ -6,7 +6,7 @@ def call(Map parameters = [:]) {
 
   clientsNode {
       container(name: 'clients') {
-        answer = sh(script: "gofabric8 e2e-env", returnStdout: true).toString()
+        answer = sh(script: "TERM=dumb && gofabric8 e2e-env", returnStdout: true).toString()
       }
   }
 
