@@ -13,7 +13,7 @@ def call(Map parameters = [:]) {
 
   echo "Looking for fabric8 installation in namespace ${ns}"
 
-  def url = flow.getServiceURL("fabric8", ns)
+  def url = flow.getServiceURL("fabric8", ns, "http", true)
   if (!url) {
     throw new Exception("Could not find service fabric8 in namespace ${ns}")
   }
