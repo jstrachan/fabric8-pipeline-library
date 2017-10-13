@@ -1,8 +1,22 @@
 #!/usr/bin/groovy
-import io.fabric8.Fabric8Commands
-import io.fabric8.Utils
 
 def call(Map parameters = [:]) {
+
+  def answer = ""
+
+  clientsNode {
+      container(name: 'clients') {
+        answer = sh(script: "gofabric8 e2e-env", returnStdout: true).toString()
+      }
+  }
+
+  echo "Found environment variables\n ${answer}"
+  return answer
+}
+
+/*
+import io.fabric8.Fabric8Commands
+import io.fabric8.Utils
 
   // TODO could we detect this from an env var maybe???
 
@@ -28,3 +42,4 @@ def call(Map parameters = [:]) {
   
 """
 }
+*/
