@@ -30,7 +30,7 @@ def call(Map parameters = [:], body) {
                                     image: "${clientsImage}",
                                     command: '/bin/sh -c',
                                     args: 'cat',
-                                    ttyEnabled: false,
+                                    ttyEnabled: true,
                                     workingDir: '/home/jenkins/',
                                     envVars: [
                                             envVar(key: 'DOCKER_CONFIG', value: '/home/jenkins/.docker/')],
