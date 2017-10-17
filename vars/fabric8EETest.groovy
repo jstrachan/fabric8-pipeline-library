@@ -19,6 +19,7 @@ def call(Map parameters = [:]) {
              """
         } finally {
 
+          echo "stashing logs and screenshots"
           sh "mkdir -p screenshots"
           sh "cp /test/ee_tests/*.log ."
           sh "cp -r /test/ee_tests/target/screenshots/* screenshots"
@@ -29,6 +30,7 @@ def call(Map parameters = [:]) {
       }
     } finally {
 
+      echo "unstashing"
       unstash screenshotsStash
       unstash "log"
 
