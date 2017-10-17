@@ -1,7 +1,7 @@
 #!/usr/bin/groovy
 
 def call(Map parameters = [:]) {
-  
+
   def beforeTest = parameters.get('beforeTest', "")
   def afterTest = parameters.get('afterTest', "")
 
@@ -17,6 +17,8 @@ def call(Map parameters = [:]) {
 
                 ${afterTest}
              """
+        } catch (e) {
+          echo "FAILED: ${e}"
         } finally {
 
           echo "stashing logs and screenshots"
@@ -28,6 +30,8 @@ def call(Map parameters = [:]) {
           stash name: "log", includes: "*.log"
         }
       }
+    } catch (e) {
+      echo "FAILED: ${e}"
     } finally {
 
       echo "unstashing"
