@@ -75,6 +75,7 @@ def call(body) {
             echo "FABRIC8_RECOMMENDER_API_URL=${FABRIC8_RECOMMENDER_API_URL}"  >> ./values.txt
             echo "FABRIC8_FORGE_API_URL=${FABRIC8_FORGE_API_URL}"  >> ./values.txt
             echo "FABRIC8_SSO_API_URL=${FABRIC8_SSO_API_URL}"  >> ./values.txt
+            echo "FABRIC8_AUTH_API_URL=${FABRIC8_AUTH_API_URL}"  >> ./values.txt
 
             echo "OPENSHIFT_CONSOLE_URL=${OPENSHIFT_CONSOLE_URL}"  >> ./values.txt
             echo "WS_K8S_API_SERVER=${WS_K8S_API_SERVER}"  >> ./values.txt
@@ -83,6 +84,7 @@ def call(body) {
             echo "PROXIED_K8S_API_SERVER=${PROXIED_K8S_API_SERVER}"  >> ./values.txt
             echo "OAUTH_ISSUER=${OAUTH_ISSUER}"  >> ./values.txt
             echo "PROXY_PASS_URL=${PROXY_PASS_URL}"  >> ./values.txt
+            echo "K8S_API_SERVER_BASE_PATH=${K8S_API_SERVER_BASE_PATH}"  >> ./values.txt
             echo "OAUTH_AUTHORIZE_URI=${OAUTH_AUTHORIZE_URI}"  >> ./values.txt
             echo "AUTH_LOGOUT_URI=${AUTH_LOGOUT_URI}"  >> ./values.txt
                 
@@ -101,6 +103,9 @@ def call(body) {
             cd fabric8-ui && npm run build:prod
             '''
     */
+
+        echo "values used in template are:"
+        sh "cat ./values.txt"
 
         if (template){
             sh "oc process -n ${openShiftProject} --param-file=./values.txt -f ./snapshot.yml | oc apply -n ${openShiftProject} -f -"
